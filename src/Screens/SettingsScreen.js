@@ -1,11 +1,14 @@
-import React from 'react'
-import { View, Text } from 'react-native'
+import React, {useState, useEffect} from 'react'
+import { View, Text, StyleSheet, SafeAreaView, Image, Dimensions, TouchableOpacity} from 'react-native'
 
 const SettingsScreen = () => {
     return(
-        <View>
-            <Text>Settings Page</Text>
-        </View>
+        <SafeAreaView>
+            <View>
+                <Text>Settings Page</Text>
+            </View>
+        </SafeAreaView>
+       
     )
 }
 
