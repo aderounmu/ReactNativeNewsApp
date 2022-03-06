@@ -3,7 +3,7 @@ import { View,Text , StyleSheet, TouchableOpacity} from 'react-native'
 
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-const NoNewsError = () => {
+const NoNewsError = ({fetchData}) => {
     return (
         <View style={[styles.mainContainer, styles.container]}>
             <Icon name="exclamation-triangle" size={60} color="#092953" style={styles.searchIcon} />
@@ -11,7 +11,7 @@ const NoNewsError = () => {
                 Sorry Something Went Wrong
             </Text>
            
-            <TouchableOpacity style={styles.container}>
+            <TouchableOpacity style={styles.container} onPress={()=>fetchData()}>
                 <Text style={styles.refreshText}>
                     Tap to refresh
                 </Text>

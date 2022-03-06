@@ -39,7 +39,7 @@ const HomeScreen = ({navigation}) => {
     .then(data => {
       setIsFetching(false)
       // console.log(data.articles[2])
-      setNewsData(data.articles)
+      setNewsData(data.articles.splice(0,5))
     })
     .catch((error) => {
       setIsError(true)
@@ -69,7 +69,7 @@ const HomeScreen = ({navigation}) => {
           isfetching ? <Loading/> : HomePageLoaded()
         }
         {
-          isError ? <NoNewsError/> : <Text></Text>//HomePageLoaded()
+          isError ? <NoNewsError fetchData={getLastNews} /> : <Text></Text>//HomePageLoaded()
         }
 
       </ScrollView>
