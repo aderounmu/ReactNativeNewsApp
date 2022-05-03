@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import { View, Text, StyleSheet, SafeAreaView, Image, Dimensions, TouchableOpacity} from 'react-native'
-
+import GButton from '../Components/general/GButton'
 export default function OnboardingScreen({navigation}) {
     // const [height, setHeight] = useState('');
     // const [width, setWidth] = useState('');
@@ -17,11 +17,7 @@ export default function OnboardingScreen({navigation}) {
                 <Image style={styles.image} source={require('../assets/onBoarding1.png')}/>
                 <Text style={styles.headline}> First to Know</Text>
                 <Text style={styles.subheadline}>All news in one place, be the first to know last news</Text>
-                <TouchableOpacity  style={styles.btn} onPress={() => navigation.navigate('WelcomeScreen') }>
-                    <Text style={styles.btn.text}>
-                    Next
-                    </Text> 
-                </TouchableOpacity>
+                <GButton width={300} text="Next" onButtonPress={() => navigation.navigate('WelcomeScreen') } />
             </View>
         </SafeAreaView>
 
@@ -60,20 +56,6 @@ const styles = StyleSheet.create({
         fontSize: 16,
         
     },
-    btn:{
-        width: 300,
-        backgroundColor: '#475AD7',
-        alignItems: 'center',
-        justifyContent: 'center',
-        paddingVertical: 12,
-        paddingHorizontal: 32,
-        borderRadius: 12,
-        text :{
-            fontSize: 16,
-            lineHeight: 21,
-            fontWeight: 'bold',
-            color: 'white',
-        }
-    }
+    
     
 })

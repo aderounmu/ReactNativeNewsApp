@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from 'react'
-import { View, Text, StyleSheet, SafeAreaView, Image, Dimensions, TouchableOpacity} from 'react-native'
-import ForgotPassWordForm from '../Components/ForgotPassWordForm'
-import RegisterForm from '../Components/RegisterForm'
-
+import { View, Text, StyleSheet, SafeAreaView, Image, Dimensions, TouchableOpacity , KeyboardAvoidingView} from 'react-native'
+import ForgotPassWordForm from '../Components/auth/ForgotPassWordForm'
+import AuthLower from '../Components/auth/AuthLower'
+import Header from '../Components/general/Header'
 
 export default function ForgotPasswordScreen({navigation}) {
 
@@ -16,17 +16,16 @@ export default function ForgotPasswordScreen({navigation}) {
     // }, []);
   return (
     <SafeAreaView style={{...styles.container, height: '100%'}}>
+    <KeyboardAvoidingView enabled>
     <View style={styles.subContainer}>
-        <Text style={styles.headline}>Forgot Password 🤔</Text>
-        <Text style={styles.subheadline}>We need your email adress so we can send you the password reset code.</Text>
+        <Header 
+        title={"Forgot Password 🤔"} 
+        subtitle={"We need your email adress so we can send you the password reset code."}
+        />
         <ForgotPassWordForm navigation={navigation}/>
     </View>
-    <View style={{...styles.subContainer, ...styles.signInContainer}}>
-        <Text>Remember the password? </Text>
-        <TouchableOpacity onPress={()=> navigation.navigate('LoginScreen')}>
-            <Text style={styles.signInContainer.NonTouch}>Try again</Text>
-        </TouchableOpacity>
-    </View>
+    </KeyboardAvoidingView>
+    <AuthLower NormalText={"Remember the password? "} LinkText="Try again" onLowerPress={() => navigation.navigate('LoginScreen')}/>
     </SafeAreaView>
   )
 }
@@ -42,14 +41,6 @@ const styles = StyleSheet.create({
         //display: 'flex',
         //flex: 1,
         marginHorizontal: 25
-    },
-    signInContainer:{
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent:'center',
-        NonTouch : {
-            color: '#8C92AD'
-        }
     },
     headline: {
         paddingTop: 50,

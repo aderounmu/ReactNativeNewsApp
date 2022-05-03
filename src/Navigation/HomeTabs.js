@@ -14,7 +14,7 @@ const tabBarOptions = {
       height: '10%',
     },
     headerShown: false
-  };
+};
 
 const HomeTabs = () =>{
     return (

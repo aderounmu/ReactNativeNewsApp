@@ -1,8 +1,9 @@
 import React, {useState, useEffect} from 'react'
-import { View, Text, StyleSheet, SafeAreaView, Image, Dimensions, TouchableOpacity} from 'react-native'
-import LoginForm from '../Components/LoginForm'
+import { View, Text, StyleSheet, SafeAreaView, Image, Dimensions, TouchableOpacity, KeyboardAvoidingView} from 'react-native'
+import AuthLower from '../Components/auth/AuthLower'
+import LoginForm from '../Components/auth/LoginForm'
 
-
+import Header from '../Components/general/Header'
 export default function LoginScreen({navigation}) {
 
     // const [height, setHeight] = useState('');
@@ -15,17 +16,15 @@ export default function LoginScreen({navigation}) {
     // }, []);
   return (
     <SafeAreaView style={{...styles.container,  height: '100%'}}>
-    <View style={styles.subContainer}>
-        <Text style={styles.headline}>Welcome Back 👋</Text>
-        <Text style={styles.subheadline}>I am happy to see you again. You can continue where you left off by logging in</Text>
-        <LoginForm navigation={navigation}/>
-    </View>
-    <View style={{...styles.subContainer, ...styles.signInContainer}}>
-        <Text>Don't have an account?  </Text>
-        <TouchableOpacity onPress={() => navigation.navigate('RegisterScreen') }>
-            <Text style={styles.signInContainer.NonTouch}>Sign Up </Text>
-        </TouchableOpacity>
-    </View>
+    <KeyboardAvoidingView enabled>
+        <View style={styles.subContainer}>
+            <Header title={"Welcome Back 👋"} subtitle="I am happy to see you again. You can continue where you left off by logging in"/>
+            {/* <Text style={styles.headline}>Welcome Back 👋</Text>
+            <Text style={styles.subheadline}>I am happy to see you again. You can continue where you left off by logging in</Text> */}
+            <LoginForm navigation={navigation}/>
+        </View>
+    </KeyboardAvoidingView>
+    <AuthLower NormalText="Don't have an account?" LinkText="Sign Up" onLowerPress={() => navigation.navigate('RegisterScreen') }/>
     </SafeAreaView>
   )
 }
@@ -42,14 +41,7 @@ const styles = StyleSheet.create({
         //flex: 1,
         marginHorizontal: 25
     },
-    signInContainer:{
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent:'center',
-        NonTouch : {
-            color: '#8C92AD'
-        }
-    },
+    
     headline: {
         paddingTop: 50,
         paddingBottom: 6,

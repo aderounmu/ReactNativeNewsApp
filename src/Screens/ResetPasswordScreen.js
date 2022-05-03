@@ -1,7 +1,8 @@
 import React, {useState, useEffect} from 'react'
-import { View, Text, StyleSheet, SafeAreaView, Image, Dimensions, TouchableOpacity} from 'react-native'
-import ResetPasswordForm from '../Components/ResetPasswordForm'
-
+import { View, Text, StyleSheet, SafeAreaView, Image, Dimensions, KeyboardAvoidingView} from 'react-native'
+import ResetPasswordForm from '../Components/auth/ResetPasswordForm'
+import AuthLower from '../Components/auth/AuthLower'
+import Header from '../Components/general/Header'
 
 
 export default function ResetPasswordScreen({navigation}) {
@@ -16,17 +17,17 @@ export default function ResetPasswordScreen({navigation}) {
     // }, []);
   return (
     <SafeAreaView style={{...styles.container, height: '100%'}}>
+    <KeyboardAvoidingView enabled>
     <View style={styles.subContainer}>
-        <Text style={styles.headline}>Create New Password 🔒</Text>
-        <Text style={styles.subheadline}>You can create a new password, please dont forget it too.</Text>
+        <Header
+        title="Create New Password 🔒"
+        subtitle="You can create a new password, please dont forget it too."
+        />
         <ResetPasswordForm navigation={navigation}/>
     </View>
-    <View style={{...styles.subContainer, ...styles.signInContainer}}>
-        <Text>Didn’t receive an email?  </Text>
-        <TouchableOpacity onPress={()=> navigation.navigate('ForgotPasswordScreen')}>
-            <Text style={styles.signInContainer.NonTouch}>Send again </Text>
-        </TouchableOpacity>
-    </View>
+    </KeyboardAvoidingView>
+    <AuthLower NormalText={"Didn’t receive an email? "} LinkText="Send again" onLowerPress={() => navigation.navigate('ForgotPasswordScreen')}/>
+
     </SafeAreaView>
   )
 }
@@ -42,14 +43,6 @@ const styles = StyleSheet.create({
         //display: 'flex',
         //flex: 1,
         marginHorizontal: 25
-    },
-    signInContainer:{
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent:'center',
-        NonTouch : {
-            color: '#8C92AD'
-        }
     },
     headline: {
         paddingTop: 50,

@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import { View, Text, StyleSheet, SafeAreaView, Image, Dimensions, TouchableOpacity} from 'react-native'
-
+import GButton from '../Components/general/GButton'
 
 const WelcomeScreen = ({navigation}) => {
     // const [height, setHeight] = useState('');
@@ -18,11 +18,8 @@ const WelcomeScreen = ({navigation}) => {
             <View style={styles.subContainer}>   
                 <Text style={styles.headline}> Nuntium</Text>
                 <Text style={styles.subheadline}>All news in one place, be the first to know last news</Text>
-                <TouchableOpacity  style={styles.btn} onPress={() => navigation.navigate('LoginScreen') }>
-                    <Text style={styles.btn.text}>
-                    Get Started
-                    </Text> 
-                </TouchableOpacity>
+                
+                <GButton width={300} text="Get Started" onButtonPress={() => navigation.navigate('LoginScreen') } />
             </View>
         </SafeAreaView>
 
@@ -44,9 +41,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         marginHorizontal: 20
     },
-    image :{
-    
-    },
+
     headline: {
        textAlign: 'center',
        paddingTop: 50,
@@ -62,21 +57,7 @@ const styles = StyleSheet.create({
         fontSize: 16,
         
     },
-    btn:{
-        width: 300,
-        backgroundColor: '#475AD7',
-        alignItems: 'center',
-        justifyContent: 'center',
-        paddingVertical: 12,
-        paddingHorizontal: 32,
-        borderRadius: 12,
-        text :{
-            fontSize: 16,
-            lineHeight: 21,
-            fontWeight: 'bold',
-            color: 'white',
-        }
-    }
+    
     
 })
 

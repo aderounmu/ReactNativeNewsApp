@@ -14,7 +14,7 @@ import ResetPasswordScreen from '../Screens/ResetPasswordScreen';
 const Stack = createNativeStackNavigator();
 export default function LoginNavigation() {
     return (
-        <Stack.Navigator screenOptions={{ headerShown: false, gestureEnabled: false }}>
+        <Stack.Navigator screenOptions={{ headerShown: false, gestureEnabled: false }} initialRouteName="LoginScreen">
             <Stack.Screen name="OnboardingScreen" component={OnboardingScreen} /> 
             <Stack.Screen name="WelcomeScreen" component={WelcomeScreen} /> 
             <Stack.Screen name="LoginScreen" component={LoginScreen} /> 

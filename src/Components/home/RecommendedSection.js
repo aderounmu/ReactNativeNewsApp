@@ -3,6 +3,7 @@ import { View, FlatList, StyleSheet, Text} from 'react-native';
 import RecommendedCard from './RecommendedCard';
 import RecommendedHeader from './RecommendedHeader';
 
+
 const RecommendedSection = ({data, navigation}) => {
     
     return(
