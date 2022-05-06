@@ -2,9 +2,10 @@ import { Link } from '@react-navigation/native';
 import React from 'react'
 import { View, ScrollView, Text , StyleSheet , Image, Linking,SafeAreaView , TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import BookmarkButton from '../Components/general/BookmarkButton';
 const NewsScreen = ({route,navigation}) =>{
 
-    const { item } = route.params
+    const { item , bookmark } = route.params
     const openBrowser = () => {
         Linking.openURL(item.url)
     }
@@ -12,13 +13,11 @@ const NewsScreen = ({route,navigation}) =>{
         <View style={styles.container}>
             <ScrollView style={styles.ScrollView}>
                 <View style={styles.IconContainer}>
-                    <TouchableOpacity style={styles.backIcon} onPress = {()=> navigation.goBack()}>
+                    <TouchableOpacity  style={styles.backIcon} onPress = {()=> navigation.goBack()}>
                         <Icon name="arrow-left" size={24} color="#fff" />
                     </TouchableOpacity>
                     <View>
-                        <TouchableOpacity style={styles.bookmarkIcon}>
-                            <Icon name="bookmark-o" size={24} color="#fff"  />
-                        </TouchableOpacity>
+                        <BookmarkButton item={item}  navigation={navigation} bookmark={bookmark} styles={styles.bookmarkIcon} />
                         <TouchableOpacity style={styles.sharerIcon}>
                             <Icon name="share-square" size={24} color="#fff"  /> 
                         </TouchableOpacity>

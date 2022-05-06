@@ -4,15 +4,15 @@ import RecommendedCard from './RecommendedCard';
 import RecommendedHeader from './RecommendedHeader';
 
 
-const RecommendedSection = ({data, navigation}) => {
+const RecommendedSection = ({data, navigation , isHome}) => {
     
     return(
         <View style={styles.container}>
-            <RecommendedHeader />
+            {isHome ? <RecommendedHeader /> : <></>}
             <FlatList 
             data = {data}
             // horizontal={true}
-            renderItem = {({item}) => <RecommendedCard item={item} navigation={navigation}/>}
+            renderItem = {({item}) => <RecommendedCard isHome={isHome} item={item} navigation={navigation}/>}
             />
         </View>
     );

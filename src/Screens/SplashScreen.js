@@ -1,17 +1,12 @@
 import React, {useState , useEffect} from 'react'
 import { View, Text, StyleSheet, SafeAreaView, Image, Dimensions, TouchableOpacity} from 'react-native'
 import { auth } from '../services/firebase/config';
-import {onAuthStateChanged , signOut  } from "firebase/auth";
+import {onAuthStateChanged } from "firebase/auth";
 
 const SplashScreen = ({navigation}) => {
 
 useEffect(()=>{
-    //navigation.navigate('LoginNavigation')
-    // signOut(auth).then(() => {
-    //     navigation.navigate('LoginNavigation')
-    //   }).catch((error) => {
-    //     // An error happened.
-    // });
+  
     setTimeout(()=>{
         //Check async Storage if Data Exist 
         //if data exist move to HomeTabs

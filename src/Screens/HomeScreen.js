@@ -34,7 +34,7 @@ const HomeScreen = ({navigation}) => {
   const getLastNews = () => {
     setIsFetching(true)
     setIsError(false)
-    fetch(`https://newsapi.org/v2/top-headlines?sources=bbc-news&apiKey=${NEWS_API_KEY}`)
+    fetch(`https://newsapi.org/v2/top-headlines?language=en&apiKey=${NEWS_API_KEY}`)
     .then(response => response.json())
     .then(data => {
       setIsFetching(false)
@@ -52,7 +52,7 @@ const HomeScreen = ({navigation}) => {
     return (
       <>
         <LatestSection data={newsData} navigation={navigation}/>
-        <RecommendedSection data={newsData}  navigation={navigation}/>
+        <RecommendedSection data={newsData}  navigation={navigation} isHome={true}/>
       </>
     )
   }  

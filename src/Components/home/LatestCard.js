@@ -1,12 +1,11 @@
 import React from 'react'
 import { View, Text, StyleSheet,TouchableOpacity, Image } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import BookmarkButton from '../general/BookmarkButton'
 const LatestCard = ({item , navigation}) => {
     return(
         <View style={styles.container}>
-            <TouchableOpacity style={styles.bookmarkIconContainer}>
-                <Icon name="bookmark-o" size={24} color="white" />
-            </TouchableOpacity>
+            <BookmarkButton item={item} navigation={navigation} bookmark={false} styles={styles.bookmarkIconContainer} />
             <Image style={styles.image} source={{ uri : item.urlToImage}}/>
             <TouchableOpacity style={styles.textContainer}
                 onPress={()=> navigation.navigate('News',{item: item})}

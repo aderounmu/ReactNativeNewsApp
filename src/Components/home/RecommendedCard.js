@@ -1,9 +1,9 @@
 import React from 'react'
 import { View, Text, StyleSheet,TouchableOpacity, Image } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-const RecommendedCard = ({item , navigation}) => {
+const RecommendedCard = ({item , navigation , isHome}) => {
     return(
-        <TouchableOpacity style={styles.container} onPress={()=>navigation.navigate('News', {item: item})}>
+        <TouchableOpacity style={styles.container} onPress={()=>navigation.navigate('News', {item: item , bookmark : !isHome})}>
             <Image style={styles.image} source={{ uri : item.urlToImage}}/>
             {/* <TouchableOpacity style={styles.textContainer}> */}
             <View style={styles.textContainer}>
