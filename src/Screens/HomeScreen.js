@@ -10,7 +10,15 @@ import RecommendedSection from '../Components/home/RecommendedSection'
 // import {NEWS_API_KEY} from "react-native-dotenv"
 import {NEWS_API_KEY} from '../config.js'
 
-// const NEWS_API_KEY="301243fd053f4d3bb5afa33eff41561c"
+
+const HomePageLoaded = ({newsData,navigation}) => {
+  return (
+    <>
+      <LatestSection data={newsData} navigation={navigation}/>
+      <RecommendedSection data={newsData}  navigation={navigation} isHome={true}/>
+    </>
+  )
+} 
 
 const HomeScreen = ({navigation}) => {
   const [newsData , setNewsData] = useState([])
@@ -48,14 +56,7 @@ const HomeScreen = ({navigation}) => {
     });
   }
 
-  const HomePageLoaded = () => {
-    return (
-      <>
-        <LatestSection data={newsData} navigation={navigation}/>
-        <RecommendedSection data={newsData}  navigation={navigation} isHome={true}/>
-      </>
-    )
-  }  
+   
   
   return(
 
@@ -66,7 +67,7 @@ const HomeScreen = ({navigation}) => {
         <SearchBar/>
         <CategoryPills changeCurrentPill = {highlightPill} currentPill={currentPill}/>
         {
-          isfetching ? <Loading/> : HomePageLoaded()
+          isfetching ? <Loading/> : <HomePageLoaded newsData={newsData} navigation={navigation}/>
         }
         {
           isError ? <NoNewsError fetchData={getLastNews} /> : <Text></Text>//HomePageLoaded()
