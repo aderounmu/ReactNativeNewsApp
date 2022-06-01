@@ -6,6 +6,7 @@ import { auth } from '../../services/firebase/config';
 import {createUserWithEmailAndPassword , updateProfile , onAuthStateChanged } from "firebase/auth"
 import GError from '../general/GError';
 import { setAuthLocal } from '../../services/LocalStore';
+import { setUpDoc } from '../../services/firebase/db';
 
 
 export default function RegisterForm({navigation}) {
@@ -77,22 +78,38 @@ export default function RegisterForm({navigation}) {
           auth,Email,Password
         )
         const user = auth.currentUser;
+
         //set user username
         
         await updateProfile(user,{displayName: Username})
+
+
         console.log(currentUser)
-        navigation.navigate('HomeTabs');
+
+
+        //create a new doc for user
+
+        await setUpDoc(user.uid);
+        
+        
+
+        
 
       }catch(err){
         setError({
           isError: true,
           message: err.message
         })
-        //throw(err)
+       console.log(err)
+      }
+
+      if(!Error.isError){
+        console.log(Error.isError)
+        // navigation.navigate('HomeTabs');
       }
     }
   return (
-    <View style={{ marginTop: 32}}>
+    <View style={{ paddingTop: 32}}>
         {/* Error Message */}
         {Error.isError ? <GError message={Error.message} />:<></>}
         {/* username */}

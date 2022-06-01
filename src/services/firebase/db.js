@@ -17,9 +17,11 @@ export async function bookMarkExist(data, id){
      where("bookmark.articles.title", "==", data.title),
      where("bookmarktotalResults", "<=", 10)
      );
-     const querySnapshot = await getDocs(q);
-     console.log(querySnapshot)
-    console.log(data)
+    const querySnapshot = await getDocs(q);
+    console.log(querySnapshot)
+    if(querySnapshot.length > 1) return true
+    else return false
+    // console.log(data)
 
 }
 
@@ -32,7 +34,7 @@ export async function setUpDoc(id){
     if (docSnap.exists()) return 'Collection Exist' 
     else {
         await setDoc(docRef,{
-            last_load: Timestamp.fromDate(new Date.now()),
+            last_load: Timestamp.fromDate(new Date()),
             read_count : 0,
             userID: id,
             bookmark: {
@@ -49,7 +51,7 @@ const docRef = doc(db, "user_data", id);
     try{
         await updateDoc(docRef,{
             "read_count" : increment(1),
-            "last_load" : Timestamp.fromDate(new Date.now())
+            "last_load" : Timestamp.fromDate(new Date())
         })
         return 'successfully added'
     }catch(err){
@@ -59,7 +61,7 @@ const docRef = doc(db, "user_data", id);
 
 
 //add bookmark to docs
-export async function addBookmark(id,data){
+export async function addBookmark(data, id){
     const docRef = doc(db, "user_data", id);
     
 
@@ -67,12 +69,13 @@ export async function addBookmark(id,data){
         ////check if use has doc item
 
         await updateDoc(docRef,{
-            "boomark.totalResults" : increment(1),
+            "bookmark.totalResults" : increment(1),
             "bookmark.articles" : arrayUnion(data)
         })
         return 'successfully added'
     }catch(err){
-        return { error: true , message: err.message}
+        throw err
+        // return { error: true , message: err.message}
     }
 
 }
@@ -83,7 +86,7 @@ export async function addBookmark(id,data){
 export async function getUserDoc(id){
     const docRef = doc(db,"user_data",id)
     const docSnap = await getDoc(docRef);
-    if(docSnap.exists()){  return docSnap.data();}
-    else return 'No Document'
+    if(docSnap.exists()){ return docSnap.data();}
+    else return { }
 }
 

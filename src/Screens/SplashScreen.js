@@ -12,6 +12,7 @@ useEffect(()=>{
         //if data exist move to HomeTabs
         //if they don't move to 
         onAuthStateChanged(auth, (user) => {
+            console.log('--- i am working')
             if (user) {
                 navigation.navigate('HomeTabs')
             } else {

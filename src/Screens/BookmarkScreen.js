@@ -11,30 +11,37 @@ import NoNewsError from '../Components/general/NoNewsError'
 
 const BookmarkScreen = ({navigation}) => {
     const [bookMark , setBookMark] = useState({})
+    const [nobookMark , setNoBookMark] = useState(false)
     const [isfetching, setIsFetching] = useState(false)
     const [isError, setIsError] = useState(false)
 
     const loadBookmark = async () => {
         setIsFetching(true)
+        setNoBookMark(false)
+        setIsError(false)
         try{
                 
             const auth = getAuth();
             const user = auth.currentUser;
-            let data = {
-                bookmark: []
-            }
+            let data = { }
             if (user !== null) {
-                data = await  getUserDoc(user.uid)
+                data = await getUserDoc(user.uid)
                 console.log(user.uid)
             }
             
             console.log(data)
             setBookMark(data.bookmark)
+
             setIsFetching(false)
+
+            if(data.bookmark.articles.length === 0 ){
+              setNoBookMark(true)
+            }
         }catch(err){
-            setBookMark([])
-            //throw err
+            setIsFetching(false)
+            setBookMark({})
             setIsError(true)
+            // throw err
         }
     }
 
@@ -42,8 +49,7 @@ const BookmarkScreen = ({navigation}) => {
     
 
         useEffect(()=>{
-            loadBookmark()
-            
+            loadBookmark()  
         },[])
  return(
     <SafeAreaView style={styles.container}>
@@ -53,7 +59,10 @@ const BookmarkScreen = ({navigation}) => {
           isfetching ? <Loading/> : <RecommendedSection data={bookMark.articles} isHome={false} navigation={navigation} />
         }
         {
-          isError ? <NoNewsError fetchData={loadBookmark} /> : <></>//HomePageLoaded()
+          isError ? <NoNewsError  fetchData={loadBookmark} /> : <></>//HomePageLoaded()
+        }
+        {
+          nobookMark ? <NoNewsError message={'Sorry you have no bookmarks'}  fetchData={loadBookmark} /> : <></>
         }
         
         </View>
